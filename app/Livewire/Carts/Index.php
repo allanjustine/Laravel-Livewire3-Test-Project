@@ -7,6 +7,9 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $selectedUsers = [];
+
+
     public function render()
     {
         $users = User::orderBy('created_at', 'desc')->get();

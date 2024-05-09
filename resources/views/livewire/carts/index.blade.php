@@ -9,9 +9,25 @@
                 <hr>
                 <div class="card border-0">
                     <div class="card-body">
-                        <h1>Item 1</h1>
-                        <p>Hello</p>
-                        <p>$100</p>
+                        <div class="row">
+                            <div class="col">
+                                @if (is_array($user->profile_image) && $user->profile_image != null)
+                                    @foreach ($user->profile_image as $index => $profile)
+                                        <img src="{{ Storage::url($profile) }}" alt=""
+                                            class="img-fluid w-25 h-25 rounded border">
+                                    @endforeach
+                                @endif
+                                @if ($user->profile_image == null)
+                                    <img src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                                        alt="" class="img-fluid w-25 h-25 rounded border">
+                                @endif
+                            </div>
+                            <div class="col">
+                                <h1>{{ $user->name }}</h1>
+                                <p>{{ $user->email }}</p>
+                                <p>{{ $user->created_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty
@@ -25,7 +41,7 @@
 
         </div>
         <div class="offcanvas-footer p-2">
-            Grand total: $1110000
+            Total users: {{ count($users) }}
         </div>
     </div>
 </div>
